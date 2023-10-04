@@ -1,0 +1,56 @@
+
+<div>
+
+<div class="box">
+  <div class="box1"></div>
+  <div class="box2"></div>
+  <div class="box3"></div>
+
+</div>
+<style>
+  div>p{
+    color: #4671ff;
+  }
+  .box{
+    height: 100%;
+    width: 500px;
+    overflow: auto;
+  }
+  div{
+    height: 100px;
+    width: 100px;
+  }
+  .box1{
+    background: antiquewhite;
+    margin: 50px 0;
+    height: 50%;
+  }
+  .box2{
+    margin: 50px 0;
+    background: #4671ff;
+  }
+  .box3{
+    background: #730e0e;
+    margin: 50px 0;
+    border: 1px #730e0e solid;
+  }
+</style>
+
+<script>
+  // const element = document.querySelector('.box3');
+  //
+  // console.log(window.innerWidth,window.innerHeight)
+  // console.log(document.documentElement.clientWidth,document.documentElement.clientHeight);
+  // document.addEventListener('wheel',()=>{
+  //   console.log(element.clientWidth,element.clientHeight);
+  //   console.log(element.offsetWidth,element.offsetHeight);
+  //   console.log(element.getBoundingClientRect())
+  // })
+
+  const ob=new IntersectionObserver((entries, observer)=>{
+    entries.forEach(e=>{
+      console.log(e)
+    })
+  },{threshold:1 ,root:document.querySelector('.box')})
+  ob.observe(document.querySelector('.box3'))
+</script>
