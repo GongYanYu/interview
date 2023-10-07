@@ -1,7 +1,6 @@
 // workerThread1.js
 
 let i = 1
-const self =this
 function simpleCount() {
   i++
   self.postMessage(i)

@@ -3,7 +3,6 @@
 const worker=new Worker('thread-worker.js',{
   name:'myWorker'
 })
-
 function postData() {
   worker.postMessage('test data')
 
