@@ -1,0 +1,43 @@
+<html lang="zh">
+<head>
+  <meta/>
+  <title>666</title>
+</head>
+
+<body>
+<script>
+  function callback(data) {
+    console.log('get data',data)
+  }
+  function jsonp(url,params) {
+    const scriptElement = document.createElement('script');
+    params.callback=callback.name
+    let first=true
+    scriptElement.src=`${url}?${Object.keys(params).reduce((pre,v)=>{
+      let res = pre+`${first?'':'&'}${v}=${params[v]}`
+      first=false
+      return res
+    },'')}`
+
+    document.body.appendChild(scriptElement)
+  }
+
+  jsonp('http://localhost:8848/test',{
+    query1:'666'
+  })
+  // const ajax=new XMLHttpRequest()
+  // ajax.open('get','http://localhost:8848/test')
+  //
+  // ajax.onreadystatechange=ev => {
+  //   switch (ajax.status) {
+  //     case 4:
+  //       console.log(ajax.responseText)
+  //   }
+  // }
+  //
+  // ajax.send('callback')
+
+</script>
+</body>
+
+</html>
