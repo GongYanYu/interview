@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div class="left">
+
+</div>
+</body>
+
+<style>
+  @keyframes hide {
+    from{
+      transform: translateX(-100%);
+    }
+
+    to{
+      transform: translateX(0);
+    }
+  }
+  body{
+    overflow: hidden;
+    margin: 0;
+  }
+  .left{
+    /*transition: all ease 1s;*/
+    width: 1300px;
+    height: 500px;
+    background: #4671ff;
+    /*transform: translateX(-100%);*/
+    animation: hide 1s ease;
+  }
+</style>
+</html>
