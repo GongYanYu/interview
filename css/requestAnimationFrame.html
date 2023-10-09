@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.3/jquery.js"></script>
+  <title>Document</title>
+  <style>
+    #div1{
+      width: 100px;
+      height: 50px;
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+<div id="div1"></div>
+
+<script>
+  let curWidth = 100
+  const maxWidth = 640
+  const $div1 = $('#div1')
+
+  // 利用setTimeout定时器，实现动画更新
+  function animate(){
+    curWidth = curWidth + 3
+    $div1.css('width', curWidth)
+    if(curWidth < maxWidth){
+      window.requestAnimationFrame(animate)
+    }
+  }
+
+
+  animate()
+</script>
+</body>
+</html>
