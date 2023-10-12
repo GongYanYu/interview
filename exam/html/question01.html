@@ -1,96 +1,54 @@
+<!DOCTYPE html>
+<html>
 
-<div class="wrap" id="wrap">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    /* 填写样式 */
+    .content{  font-size: 14px;}
+    .content em{
+      font-style: normal;    color: #c00;
+    }
+  </style>
+</head>
+
+<body>
+<!-- 填写标签 -->
+<div class="content" id="jsContent">
+  前端开发 是创建Web页面或app等前端界面呈现给用户的过程，
+  通过HTML，CSS及JavaScript以及衍生出来的各种技术、框架、解决方案，
+  来实现互联网产品的用户界面交互。它从网页制作...
 </div>
+<script type="text/javascript">
+  // 填写JavaScript
+  function highlight(word) {
+    if (!word){
+      return
+    }
+    const ele=document.getElementById('jsContent')
+    let data = ele.innerHTML
+    let index=word.length,have=false
+    function find(str,x) {
+      if (str){
+        return str.indexOf(x)
+      }
+      return -1
+    }
+    let current=0
+    function doChange(data){
+      while (index>0){
+        let i = find(data.substring(current),word.substring(0,index))
+        if (i!==-1){
+          let end=i+index
 
-<script>
-  const showList=[
-    '1','2','3','4'
-  ]
+          current=i+1
 
-  function createElement(){
-    const show=document.createElement('div')
-    show.classList.add('box')
-    show.classList.add('hide')
-    return show
-  }
-  function getShow(){
-    let index=-1
-    return function (){
-      ++index
-      index%=showList.length
-      return showList[index]
+        }
+      }
     }
   }
-  const getData=getShow()
-  const fragment=document.createDocumentFragment()
-  let dom1=createElement()
-  dom1.innerText=getData()
-  dom1.classList.replace('hide','show')
-  let dom2=createElement()
-  fragment.appendChild(dom1)
-  fragment.appendChild(dom2)
-  document.getElementById('wrap').appendChild(fragment)
-  function next() {
-    dom1.classList.replace('show','hide')
-    dom2.innerText=getData()
-    dom2.classList.replace('hide','show')
-
-    let temp=dom1
-    dom1=dom2
-    dom2=temp
-  }
-
-  setInterval(next,1500)
-
-
+  highlight('前端开发')
 </script>
+</body>
 
-
-<style>
-  @keyframes show {
-    from{
-      transform: translateX(100%);
-    }
-    to{
-      transform: translateX(0);
-    }
-  }
-  @keyframes hide {
-    from{
-      transform: translateX(0);
-    }
-    to{
-      transform: translateX(-100%);
-    }
-  }
-
-  .wrap {
-    height: 200px;
-    width: 500px;
-    background: #4671ff;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .wrap .box{
-    height: 100%;
-    width: 100%;
-    background: #730e0e;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 50px;
-    color: white;
-  }
-  .show{
-    animation: show .8s;
-  }
-
-  .hide{
-    animation: hide .8s;
-    transform: translateX(100%);
-  }
-</style>
+</html>
