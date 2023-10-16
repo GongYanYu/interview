@@ -1,54 +1,31 @@
-<!DOCTYPE html>
-<html>
+<style>
 
-<head>
-  <meta charset="UTF-8">
-  <style>
-    /* 填写样式 */
-    .content{  font-size: 14px;}
-    .content em{
-      font-style: normal;    color: #c00;
-    }
-  </style>
-</head>
-
-<body>
-<!-- 填写标签 -->
-<div class="content" id="jsContent">
-  前端开发 是创建Web页面或app等前端界面呈现给用户的过程，
-  通过HTML，CSS及JavaScript以及衍生出来的各种技术、框架、解决方案，
-  来实现互联网产品的用户界面交互。它从网页制作...
-</div>
-<script type="text/javascript">
-  // 填写JavaScript
-  function highlight(word) {
-    if (!word){
-      return
-    }
-    const ele=document.getElementById('jsContent')
-    let data = ele.innerHTML
-    let index=word.length,have=false
-    function find(str,x) {
-      if (str){
-        return str.indexOf(x)
-      }
-      return -1
-    }
-    let current=0
-    function doChange(data){
-      while (index>0){
-        let i = find(data.substring(current),word.substring(0,index))
-        if (i!==-1){
-          let end=i+index
-
-          current=i+1
-
-        }
-      }
-    }
+  #root{
+    display: flex;
+    height: 100px;
+    width: 100%;
   }
-  highlight('前端开发')
-</script>
-</body>
 
-</html>
+  #test1{
+    flex: 1;
+    background: #730e0e;
+  }
+  #test2{
+    flex: 1;
+    background: #4671ff;
+  }
+  #test3{
+    flex: 1;
+    width: 1500px;
+    background: #1bcedf;
+  }
+</style>
+
+<div id="root">
+  <div id="test1">
+    <div style="width: 60vw"></div>
+  </div>
+  <div id="test3"></div>
+  <div id="test2"></div>
+
+</div>

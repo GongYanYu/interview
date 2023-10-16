@@ -36,11 +36,11 @@ function observe(obj,deep=false) {
     if (deep&&value!=null&&typeof value ==='object'){
       observe(value)
     }
-    defineObserve(obj,objKey,value)
+    defineObserve(obj,objKey,value,deep)
   }
 }
 
-function defineObserve(obj,key,val) {
+function defineObserve(obj,key,val,deep) {
   Object.defineProperty(obj,key,{
     get() {
       //可以在这里实现收集订阅者，因为Compile需要获取数据，必然需要调用Getter
@@ -50,6 +50,9 @@ function defineObserve(obj,key,val) {
       //新旧相同 pass
       if (val === v){
         return
+      }
+      if (deep&&v!=null&&typeof v ==='object'){
+        observe(v)
       }
       //可以在这里调用Dep中所有Watcher的update通知所有订阅界面更新
       console.log('update view')
@@ -89,14 +92,18 @@ function observeVue3(obj,deep=false) {
       if (old===newValue){
         return
       }
+
+      if (deep&&newValue&&typeof newValue === 'object'){
+        newValue=observeVue3(newValue,deep)
+      }
+
       //更新
       Reflect.set(target,p,newValue,receiver)
-
       //通知
       console.log('update view',p)
     },
-    defineProperty(target, property, attributes) {
-      //监控删除
+    deleteProperty(target, p) {
+      Reflect.defineProperty(target,p)
     }
   })
 }
@@ -110,16 +117,19 @@ const obj={
 }
 function testVue2() {
   observe(obj,true)
-  obj.object.test=2
+  obj.object={name:1}
+  obj.object.name=2
 }
 
 function testVue3() {
   const objProxy = observeVue3(obj,true)
-  objProxy.name=2
-  objProxy.object.test=2
+  objProxy.object2={name:1}
+  console.log(objProxy.object2)
+  objProxy.object2.name2=2
 }
 
 testVue3()
+
 ```
 
 testVue3效果
@@ -237,6 +247,15 @@ function defineObserve(obj,key,val) {
   })
 }
 ```
+
+
+
+## 扩展
+
+### #1 Object.defineProperty() 来进行数据劫持有什么缺点？
+
+1. 无法劫持对象的添加和删除；
+2. 对于对象来说，无法劫持通过下标属性新增赋值变化，但是可以调用vue优化的方法例如pop、push、splice、shift、unshift、sort
 
 
 
