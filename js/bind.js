@@ -2,11 +2,16 @@
 Function.prototype.mBind=function (ctx,...args) {
   const target=this
   return function (){
-    const argsAll=args.concat(arguments)
+    const argsAll=args.concat(Array.from(arguments))
     let targetIt=target?target:this
     return targetIt.apply(ctx,argsAll)
   }
 }
+
+function test(a,b) {
+  console.log(a+b+this.c)
+}
+
 
 const obj={
   name:1,
@@ -14,7 +19,4 @@ const obj={
   c:1,
   d:2
 }
-const {name,v,...rest}=obj
-
-console.log(name,v,rest)
-
+test.mBind(obj)()

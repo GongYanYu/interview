@@ -21,8 +21,16 @@
   }
 </style>
 
+
+<script lang="js">
+  function doIt() {
+    // history.pushState({},'','/question02.html')
+    location.href='question01.html'
+  }
+</script>
+
 <div id="root">
-  <div id="test1">
+  <div id="test1" onclick="doIt()">
     <div style="width: 60vw"></div>
   </div>
   <div id="test3"></div>
